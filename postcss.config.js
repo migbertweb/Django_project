@@ -1,15 +1,11 @@
-const tailwindcss = require('tailwindcss');
-module.exports = {
+module.exports = () => {
+  const prod = process.env.NODE_ENV === 'production';
+  return {
     plugins: [
-        'postcss-preset-env',
-        tailwindcss
-    ],
+      require('postcss-fixes'),
+      require('postcss-import'),
+      require('tailwindcss'),
+      require('autoprefixer')
+    ]
+  };
 };
-
-//module.exports = {
-//     plugins: [
-//         require("tailwindcss")
-//         ("./tailwind.config.js"),
-//         require("autoprefixer"),
-//     ],
-// }
