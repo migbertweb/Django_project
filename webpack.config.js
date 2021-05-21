@@ -1,35 +1,55 @@
 const path = require('path');
-module.exports = {
-    entry: './src/index.js', // path to our input file
-    output: {
-        filename: 'index-bundle.js', // output bundle file name
-        path: path.resolve(__dirname, './static'), // path to our Django static directory
-    },
-    module: {
-        rules: [{
-                test: /\.js$/i, // loader babel a los .js
-                include: path.resolve(__dirname, 'src'),
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env'],
-                    },
-                },
-            },
-            {
-                test: /\.css$/i, // loader a los .css
-                include: path.resolve(__dirname, 'src'),
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    'postcss-loader'
-                ],
-            },
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const { ESBuildMinifyPlugin } = require('esbuild-loader');
+
+const prod = process.env.NODE_ENV === 'production';
+
+const config = {
+  entry: {
+    app: './src/js/app'
+  },
+  output: {
+    filename: 'js/[name].js',
+    chunkFilename: 'js/[name].[chunkhash:3].js',
+    path: path.resolve('./static')
+  },
+  devServer: {
+    contentBase: path.resolve(__dirname, 'app'),
+    watchContentBase: true,
+    writeToDisk: true,
+    open: true
+  },
+  module: {
+    rules: [{
+        test: /\.js$/,
+        loader: 'esbuild-loader'
+      },
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          { loader: "css-loader", options: { url: false } },
+          "postcss-loader",
         ],
-    },
-    devServer: {
-        contentBase: path.resolve(__dirname, './static'),
-        watchContentBase: true,
-        open: true,
-    },
+      },
+    ],
+  },
+  optimization: {
+    minimize: prod,
+    minimizer: [
+      new ESBuildMinifyPlugin({
+        css: true
+      })
+    ]
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css'
+    }),
+    // new CopyPlugin({ patterns: [{ from: 'src/index.html', to: '../views/pages/index.html' }] })
+  ],
+  mode: prod ? 'production' : 'development'
 };
+
+module.exports = config;

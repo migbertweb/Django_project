@@ -1,4 +1,5 @@
-import './style.css'; //importo las clases de tailwind css
+import '../css/app.css';
+
 /*
 Script de prueba javascript
 */
@@ -9,3 +10,4 @@ function component() {
     return element;
 }
 document.body.appendChild(component());
+console.log('Hello from app.js');
