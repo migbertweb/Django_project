@@ -5,7 +5,8 @@
     "main": "index.js",
     "scripts": {
         "dev": "webpack --mode=development --progress",
-        "start": "webpack-cli serve",
+        "watch": "npm-watch",
+        "start": "webpack server --mode development --config webpack.config.js",
         "build": "npm run clean && npx cross-env NODE_ENV=production npx webpack-cli",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -22,11 +23,14 @@
     "homepage": "https://github.com/migbertweb/Django_project#readme",
     "devDependencies": {
         "@tailwindcss/forms": "^0.3.2",
+        "alpinejs": "^2.8.2",
         "autoprefixer": "^10.2.5",
         "copy-webpack-plugin": "^8.1.1",
         "css-loader": "^5.2.5",
         "esbuild-loader": "^2.13.1",
+        "lit": "^2.0.0-rc.2",
         "mini-css-extract-plugin": "^1.6.0",
+        "npm-watch": "^0.9.0",
         "postcss": "^8.2.15",
         "postcss-cli": "^8.3.1",
         "postcss-fixes": "^2.0.1",

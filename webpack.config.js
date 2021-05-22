@@ -15,10 +15,11 @@ const config = {
     path: path.resolve('./static')
   },
   devServer: {
-    contentBase: path.resolve(__dirname, 'app'),
+    contentBase: path.resolve(__dirname, './webdjango'),
     watchContentBase: true,
     writeToDisk: true,
-    open: true
+    open: false,
+    progress: true
   },
   module: {
     rules: [{
