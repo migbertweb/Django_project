@@ -12,7 +12,7 @@ module.exports = {
   mode: 'jit',
   purge: {
     mode: 'all',
-    content: ['./src/**/*.html', './src/**/*.liquid', './src/js/**/*.js'],
+    content: ['./templates/**/*.html', './polls/**/*.html', './src/**/*.html', './src/**/*.liquid', './src/js/**/*.js'],
   },
   theme: {
     extend: {
