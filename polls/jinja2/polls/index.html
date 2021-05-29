@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %} Polls {% endblock %}
+{% block content %}
+{% if latest_question_list %}
+<ul class="list-decimal">
+    {% for question in latest_question_list %}
+    <li class="mt-2 list-item text-blue-700 hover:underline hover:text-red-500">
+        <a href="{{ url ('polls:detail',args=[question.id] ) }}">
+            {{ question.question_text }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p class="bg-gray-50 px-4 py-2 rounded-md">No polls are available.</p>
+{% endif %}
+{# comment %}
+<myinput-element name="name" label="Nombre"></myinput-element>
+{% endcomment #}
+{% endblock %}

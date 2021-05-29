@@ -9,10 +9,15 @@ const systemColors = {
 };
 
 module.exports = {
-  mode: 'jit',
+  //mode: 'jit',
   purge: {
-    mode: 'all',
-    content: ['./templates/**/*.html', './polls/**/*.html', './src/**/*.html', './src/**/*.liquid', './src/js/**/*.js'],
+    //mode: 'all',
+    //content: ['./templates/**/*.html',
+    //  './polls/**/*.html',
+    //  './src/**/*.html',
+    //  './src/**/*.liquid',
+    //  './src/js/**/*.js'
+    //],
   },
   theme: {
     extend: {
@@ -35,5 +40,5 @@ module.exports = {
   variants: {
     borderWidth: ['responsive', 'hover'],
   },
-  plugins: [require('@tailwindcss/forms')],
+  //plugins: [require('@tailwindcss/forms')],
 };
