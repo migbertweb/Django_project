@@ -1,0 +1,33 @@
+{% extends "pre-base.html" %}
+{# {% load static %} #}
+{% block header %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        {% block title %}My amazing site{% endblock %}|Django
+    </title>
+    <link rel="stylesheet" href="{{ static('css/app.css') }}" />
+</head>
+
+<body class="bg-gray-200 font-sans">
+    {% endblock %}
+    {% block footer %}
+    <div class="flex bg-white m-8 space-y-4 border-gray-50 rounded-md shadow-md">
+        <div class="container m-6 p-2">
+            {% block content %}
+            
+            {# bloque del content #}
+            
+            {% endblock %}
+        </div>
+    </div>
+    <script src="{{ static('js/app.js') }}">
+    </script>
+</body>
+
+</html>
+{% endblock %}
