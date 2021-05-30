@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'polls.apps.PollsConfig',
 ]
 
 MIDDLEWARE = [
@@ -52,9 +53,35 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'webdjango.urls'
 
 TEMPLATES = [
+    # Parte que hay que añadir para configurar Jinja2 en nuestro proyecto en Django
+    # Esta es la parte que debemos añadir a la variable TEMPLATES.
+    # Es recomendable ponerla antes que la opción por defecto.
+    {
+        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'DIRS': [
+            BASE_DIR / 'jinja2',
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'environment': 'jinja2_env.environment',  # Modificación 2
+            'auto_reload': DEBUG,
+            'autoescape': True,
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+
+    # Gestor de plantillas por defecto en Django.
+    # Es importante mantenerlo, porque se utiliza para renderizar las plantillas que vienen en Django.
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
